@@ -1,5 +1,7 @@
 from io import BytesIO
 
+_max_depth = 10
+
 def _convert_to_string(d):
     return ("\"%s\"" % (str(d).\
                             replace('\\', '\\\\').\
@@ -8,6 +10,8 @@ def _convert_to_string(d):
 def get_as_python(d, level=0):
     if level == 0 and issubclass(d.__class__, dict) is False:
         raise TypeError("The outer-most type must be a dictionary.")
+    elif level > _max_depth:
+        raise Exception("Data is too deep. Abort.")
 
     if d is None:
         return ('None')
