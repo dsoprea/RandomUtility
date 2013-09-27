@@ -1,7 +1,7 @@
 RandomUtility
 =============
 
-Disparate tools by published by Dustin.
+Disparate tools published by Dustin.
 
 
 Tools
