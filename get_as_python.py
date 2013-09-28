@@ -3,11 +3,13 @@ from io import StringIO
 _max_depth = 10
 
 def _convert_to_string(d):
-    return ("\"%s\"" % (str(d).\
-                        replace('\\', '\\\\').\
-                        replace('"', '\\"')))
+    return _str("\"%s\"" % (_str(d).\
+                             replace('\\', '\\\\').\
+                             replace('"', '\\"')))
 
 # Python 2/3 compatibility.
+
+_str = str
 
 try:
     unicode
@@ -15,17 +17,20 @@ try:
 except NameError:
     unicode = str
     long = int
+else:
+    # If we're not in Python3, use 'unicode' to write to the buffer.
+    _str = unicode
 
-_comma = ','
-_start_paren = '('
-_stop_paren = ')'
-_start_square = '['
-_stop_square = ']'
-_start_curly = '{'
-_stop_curly = '}'
-_equal = ' = '
-_colon = ':'
-_nl = '\n'
+_comma = _str(',')
+_start_paren = _str('(')
+_stop_paren = _str(')')
+_start_square = _str('[')
+_stop_square = _str(']')
+_start_curly = _str('{')
+_stop_curly = _str('}')
+_equal = _str(' = ')
+_colon = _str(':')
+_nl = _str('\n')
 
 def get_as_python(d, level=0):
     if level == 0 and issubclass(d.__class__, dict) is False:
@@ -34,11 +39,11 @@ def get_as_python(d, level=0):
         raise Exception("Data is too deep. Abort.")
 
     if d is None:
-        return 'None'
+        return _str('None')
     elif issubclass(d.__class__, (str, unicode)):
         return _convert_to_string(d)
     elif issubclass(d.__class__, (int,float,long)):
-        return ("%s" % (d))
+        return _str("%s" % (d))
     elif issubclass(d.__class__, (tuple,list)):
         if issubclass(d.__class__, tuple):
             start_char = _start_paren
@@ -67,7 +72,7 @@ def get_as_python(d, level=0):
             # to return Python code.
             
             for k, v in d.items():
-                s.write(str(k))
+                s.write(_str(k))
                 s.write(_equal)
                 s.write(get_as_python(v, level + 1))
                 s.write(_nl)
