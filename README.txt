@@ -1,6 +1,3 @@
-RandomUtility
-=============
-
 Disparate tools by published by Dustin. They are Python3 compatible.
 
 
