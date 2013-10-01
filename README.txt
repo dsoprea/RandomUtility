@@ -5,7 +5,7 @@ Disjunct utilities. They are Python3 compatible.
 
 
 Utilities
------
+---------
 
 get_as_python: Convert data to Python code.
 setup_support: Scripts to help with executable script placement during an 
