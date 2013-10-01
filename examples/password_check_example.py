@@ -46,26 +46,26 @@ with open(dictionary_filepath, 'w') as f:
 dictionary_validator = DictionaryValidator(dictionary='/tmp/dictionary.txt')
 common_validator = CommonSequenceValidator(PASSWORD_COMMON_SEQUENCES)
 
-print
+print("")
 check_password(length_validator, 'ab')
 check_password(length_validator, 'abcdefghijklmnop')
 check_password(length_validator, 'abcdefgh')
 
-print
+print("")
 check_password(complexity_validator, 'simple')
 check_password(complexity_validator, 'simpleAB')
 check_password(complexity_validator, 'simpleAB01')
 check_password(complexity_validator, 'simpleAB01;,')
 
-print
+print("")
 check_password(dictionary_validator, 'mycompanyname')
 check_password(dictionary_validator, 'mybirthday')
 check_password(dictionary_validator, 'completelyrandompassword')
 
-print
+print("")
 check_password(common_validator, '12345')
 check_password(common_validator, 'qrstuv')
 check_password(common_validator, 'nocommonsequences')
 
-print
+print("")
 

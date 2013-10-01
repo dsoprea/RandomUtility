@@ -13,9 +13,18 @@ class ValidationError(Exception):
 # Python3 doesn't have "unicode" (all strings are unicode).
 
 try:
-    _ = unicode
-except:
-    _ = str
+    unicode
+except NameError:
+    unicode = str
+
+# Python3 doesn't have "xrange".
+
+try:
+    xrange
+except NameError:
+    xrange = range
+
+_ = unicode
 
 def smart_unicode(data):
     if issubclass(data.__class__, unicode):
