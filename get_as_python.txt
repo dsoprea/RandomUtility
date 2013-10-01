@@ -1,0 +1,21 @@
+Summary
+-------
+
+Convert data to Python code.
+
+
+Usage
+-----
+
+from get_as_python import get_as_python
+check_password(complexity_validator, 'simple')
+get_as_python({ 'data1': { 'data22': { 'data33': 44 }}, 
+                'data2': ['aa','bb','cc'], 
+                'data3': ('dd','ee','ff') })
+
+# Output (notice that a dict does not carry order, as expected):
+#
+#    data1 = {"data22":{"data33":44}}
+#    data3 = ["dd","ee","ff"]
+#    data2 = ["aa","bb","cc"]
+
