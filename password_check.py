@@ -9,7 +9,12 @@
 ###############################################################################
 
 from __future__ import division
+
+import logging
+
 from string import punctuation
+
+log = logging.getLogger('PassCheck')
 
 class ValidationError(Exception):
     def __init__(self, message, code=None):
@@ -61,6 +66,8 @@ class LengthValidator(object):
         self.max_length = max_length
 
     def __call__(self, value):
+        log.debug("Checking password length.")
+
         if self.min_length and len(value) < self.min_length:
             raise ValidationError(
                 self.message % _("Must be %s characters or more") % self.min_length,
@@ -80,6 +87,8 @@ class ComplexityValidator(object):
     def __call__(self, value):
         if self.complexities is None:
             return
+
+        log.debug("Checking password complexity.")
 
         uppercase, lowercase, digits, non_ascii, punctuation_ = set(), set(), set(), set(), set()
 
@@ -153,6 +162,9 @@ class BaseSimilarityValidator(object):
         return min(row1)
 
     def __call__(self, value):
+        log.debug("Checking password similarity: %s" % 
+                  (self.__class__.__name__))
+
         for haystack in self.haystacks:
             distance = self.fuzzy_substring(value, haystack)
             longest = max(len(value), len(haystack))
