@@ -1,0 +1,53 @@
+Summary
+-------
+
+Present a series of prompts to the console user. These can have defaults and be 
+optional or required, as well as allowing empty responses.
+
+
+Usage
+-----
+
+Each prompt can be defined as a short tuple, or an extended tuple. The prompts 
+are provided as the values of a dictionary. The keys are the IDs that will be 
+returned with the responses.
+
+Short:
+    (label_text, is_required, default_value)
+
+Extended:
+    (label_text, is_required, default_value, with_nl, can_truncate_default)
+
+Explanations:
+
+    label_text: The text of the prompt to be presented as the question
+    is_required: Whether to force a response. Can raise PromptAbortException.
+    default_value: Default response text. Can be None.
+    with_nl: If prompt should be on one line and the response on the next.
+    can_truncate_default: If the default value can be shortened on the screen.
+
+
+Examples
+--------
+
+Import:
+    from text_prompts import text_prompts
+
+Example (using the short prompt definitions):
+    Code:
+        text_prompts({ 'prompt1': ('Prompt 1', True, None), 
+                       'prompt2': ('Prompt 2', False, 'default')})
+
+    Provide both responses:
+        Prompt 1 (req): first response
+        Prompt 2 [CTRL+D for "default"]: second response
+
+        {'prompt1': 'first response', 'prompt2': 'second response'}
+
+    Provide the first response, and default the second:
+
+        Prompt 1 (req): first response
+        Prompt 2 [CTRL+D for "default"]: 
+
+        {'prompt1': 'first response', 'prompt2': 'default'}
+
