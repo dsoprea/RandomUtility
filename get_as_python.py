@@ -1,3 +1,11 @@
+###############################################################################
+# Copyright (C) 2013 Dustin Oprea                                             #
+# License: http://www.gnu.org/licenses/gpl.html GPL version 2 or higher       #
+#                                                                             #
+# See https://github.com/dsoprea/RandomUtility for the full collection of     #
+# tools.                                                                      #
+###############################################################################
+
 from io import StringIO
 
 _max_depth = 10

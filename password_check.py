@@ -1,3 +1,13 @@
+###############################################################################
+# Copyright (C) 2013 Dustin Oprea                                             #
+# License: http://www.gnu.org/licenses/gpl.html GPL version 2 or higher       #
+# based on code in "django-passwords" by Donald Stufft                        #
+# (https://github.com/dstufft/django-passwords/blob/master/passwords/         #
+#  validators.py)                                                             #
+# See https://github.com/dsoprea/RandomUtility for the full collection of     #
+# tools.                                                                      #
+###############################################################################
+
 from __future__ import division
 from string import punctuation
 
@@ -32,25 +42,15 @@ def smart_unicode(data):
 
     return data.decode('ascii')
 
-COMMON_SEQUENCES = [
-    "0123456789",
-    "`1234567890-=",
-    "~!@#$%^&*()_+",
-    "abcdefghijklmnopqrstuvwxyz",
-    "quertyuiop[]\\asdfghjkl;\'zxcvbnm,./",
-    'quertyuiop{}|asdfghjkl;"zxcvbnm<>?',
-    "quertyuiopasdfghjklzxcvbnm",
-    "1qaz2wsx3edc4rfv5tgb6yhn7ujm8ik,9ol.0p;/-['=]\\",
-    "qazwsxedcrfvtgbyhnujmikolp"
-]
-
-# Settings
-#PASSWORD_MIN_LENGTH = 6#getattr(settings, "PASSWORD_MIN_LENGTH", 6)
-#PASSWORD_MAX_LENGTH = None#getattr(settings, "PASSWORD_MAX_LENGTH", None)
-#PASSWORD_DICTIONARY = None#getattr(settings, "PASSWORD_DICTIONARY", None)
-#PASSWORD_MATCH_THRESHOLD = 0.9#getattr(settings, "PASSWORD_MATCH_THRESHOLD", 0.9)
-PASSWORD_COMMON_SEQUENCES = COMMON_SEQUENCES#getattr(settings, "PASSWORD_COMMON_SEQUENCES", COMMON_SEQUENCES)
-#PASSWORD_COMPLEXITY = None#getattr(settings, "PASSWORD_COMPLEXITY", None)
+PASSWORD_COMMON_SEQUENCES = [ "0123456789",
+                              "`1234567890-=",
+                              "~!@#$%^&*()_+",
+                              "abcdefghijklmnopqrstuvwxyz",
+                              "quertyuiop[]\\asdfghjkl;\'zxcvbnm,./",
+                              'quertyuiop{}|asdfghjkl;"zxcvbnm<>?',
+                              "quertyuiopasdfghjklzxcvbnm",
+                              "1qaz2wsx3edc4rfv5tgb6yhn7ujm8ik,9ol.0p;/-['=]\\",
+                              "qazwsxedcrfvtgbyhnujmikolp" ]
 
 class LengthValidator(object):
     message = _("Invalid Length (%s)")
