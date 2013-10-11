@@ -1,0 +1,9 @@
+Random Utility is a collection of utilities distributed by Dustin Oprea. Use 
+them as you like. It is expected that they may not all be packaged together in
+your project (as they may not all be required). They are distributed under GPL 
+2. Please include this stub file and the license where these tools are used.
+
+For more information, go to https://github.com/dsoprea/RandomUtility.
+
+Dustin Oprea, 2013-10-11
+
