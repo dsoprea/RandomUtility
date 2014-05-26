@@ -1,0 +1,13 @@
+Summary
+-------
+
+Start an SSL web-server from the code.
+
+
+Usage
+-----
+
+It's a simple construction, but the example script can be run directly.
+
+$ cd ssl_webserver
+$ ./ssl_webserver.py
