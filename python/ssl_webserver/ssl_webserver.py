@@ -22,7 +22,6 @@ class _SecureHTTPServer(BaseHTTPServer.HTTPServer):
             # The default port is 1443 so that we don't have to be root.
             binding = ('', 1443)
          
-        # We can't use super() because it's not a new-style class.
         SocketServer.BaseServer.__init__(self, binding, handler_cls)
  
         s = socket.socket(self.address_family, self.socket_type)
