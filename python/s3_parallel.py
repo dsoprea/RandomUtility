@@ -31,7 +31,7 @@ class ParallelUpload(object):
         self.__sk = sk
         self.__bucket_name = bucket_name
         self.__filepath = filepath
-        self.__s3_key_name = os.path.basename(filepath)
+        self.__s3_key_name = os.path.basename(self.__filepath)
         self.__chunk_size_b = chunk_size_b
         self.__coverage = 0.0
         self.__monitor_interval_s = _DEFAULT_MONITOR_INTERVAL_S
@@ -79,7 +79,7 @@ class ParallelUpload(object):
                              self.__filesize_b) - \
                          offset
 
-        with open(filepath, 'rb') as f:
+        with open(self.__filepath, 'rb') as f:
             f.seek(offset)
             mp.upload_part_from_file(
                 f, 
