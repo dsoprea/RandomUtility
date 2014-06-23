@@ -1,7 +1,7 @@
 Summary
 -------
 
-A parallel S3 uploader using greenlets (gevent).
+A parallel S3 *uploader* using greenlets (gevent).
 
 
 Usage
@@ -20,7 +20,8 @@ Examples
 
 This upload was performed with a 130M file.
 
-    $ python s3_parallel.py (access key) (secret key) (bucket name) (file-path)
+    $ python s3_parallel_upload.py (access key) (secret key) (bucket name) (key name) (file-path)
+    ...
     2014-06-17 10:16:48,458 - __main__ - DEBUG -   0%    0%    0%    0%    0%    0%    0% 
     2014-06-17 10:16:58,459 - __main__ - DEBUG -   3%    3%    2%    2%    2%    1%    7% 
     2014-06-17 10:17:08,460 - __main__ - DEBUG -   6%    5%    5%    4%    5%    4%   14% 

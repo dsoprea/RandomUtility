@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # A distant cousin of : https://gist.githubusercontent.com/chrishamant/1556484/raw/366c0d1ba0c653a04ccf0fd0274db7f004ae585d/s3_multipart_upload.py
 
 import gevent.monkey
@@ -23,15 +24,16 @@ _DEFAULT_MONITOR_INTERVAL_S = 10
 _logger = logging.getLogger(__name__)
 
 
-class ParallelUpload(object):
-    def __init__(self, ak, sk, bucket_name, filepath, 
+class S3ParallelUpload(object):
+    def __init__(self, ak, sk, bucket_name, key_name, filepath, 
                  chunk_size_b=_DEFAULT_CHUNK_SIZE_B,
                  monitor_interval_s=_DEFAULT_MONITOR_INTERVAL_S):
         self.__ak = ak
         self.__sk = sk
+
         self.__bucket_name = bucket_name
+        self.__key_name = key_name
         self.__filepath = filepath
-        self.__s3_key_name = os.path.basename(self.__filepath)
         self.__chunk_size_b = chunk_size_b
         self.__coverage = 0.0
         self.__monitor_interval_s = _DEFAULT_MONITOR_INTERVAL_S
@@ -44,11 +46,11 @@ class ParallelUpload(object):
 
     def __get_bucket(self, bucket_name):
         conn = boto.s3.connection.S3Connection(self.__ak, self.__sk)
-        return conn.lookup(bucket_name)
+        return conn.get_bucket(bucket_name)
 
     def __standard_upload(self):
         bucket = self.__get_bucket(self.__bucket_name)
-        new_s3_item = bucket.new_key(self.__s3_key_name)
+        new_s3_item = bucket.new_key(self.__key_name)
         new_s3_item.set_contents_from_filename(
             self.__filepath, 
             cb=self.__standard_cb, 
@@ -102,7 +104,7 @@ class ParallelUpload(object):
     def __multipart_upload(self):
         bucket = self.__get_bucket(self.__bucket_name)
 
-        mp = bucket.initiate_multipart_upload(self.__s3_key_name)
+        mp = bucket.initiate_multipart_upload(self.__key_name)
         mp_info = (mp.id, mp.key_name, mp.bucket_name)
         chunk_list = range(0, self.__filesize_b, self.__chunk_size_b)
 
@@ -135,11 +137,12 @@ class ParallelUpload(object):
         else:
             self.__multipart_upload()
 
-def download(*args):
-    return ParallelUpload(*args).start()
+def upload(*args):
+    return S3ParallelUpload(*args).start()
 
 if __name__ == '__main__':
     _logger.setLevel(logging.DEBUG)
+    logging.getLogger('boto').setLevel(logging.INFO)
 
     ch = logging.StreamHandler()
 
@@ -150,9 +153,9 @@ if __name__ == '__main__':
 
     import sys
     if len(sys.argv) < 5:
-        print("Please provide the access-key, secret-key, bucket-name, and "
-              "file-path to upload.")
+        print("Please provide the access-key, secret-key, bucket-name, "
+              "key_name, and file-path to upload.")
         sys.exit(1)
 
-    (_ignore, ak, sk, bucket_name, filepath) = sys.argv
-    download(ak, sk, bucket_name, filepath)
+    (_ignore, ak, sk, bucket_name, key_name, filepath) = sys.argv
+    upload(ak, sk, bucket_name, key_name, filepath)

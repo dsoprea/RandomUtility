@@ -13,7 +13,8 @@ Disjunct utilities packaged for convenience.
 ### Python (Python 2.x compatible, or Python3 untested)
 
 - *ssl_webserver*: A simple, Python-based SSL webserver.
-- *s3_parallel.py*: A parallel S3 uploader using greenlets (gevent).
+- *s3_parallel_upload.py*: A parallel S3 uploader using greenlets (gevent).
+- *s3_parallel_download.py*: A parallel S3 downloader using greenlets (gevent).
 - *ssl_sign.py*: A parallel S3 uploader using greenlets (gevent).
 
 ### C
