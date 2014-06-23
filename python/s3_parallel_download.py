@@ -135,9 +135,9 @@ class S3ParallelDownload(object):
         _logger.debug("Size: %d", filesize_b)
 
         if filesize_b < _MIN_MULTIPART_SIZE_B:
-            self.__standard_download(filesize_b)
+            return self.__standard_download(filesize_b)
         else:
-            self.__multipart_download(filesize_b)
+            return self.__multipart_download(filesize_b)
 
 def download(*args):
     return S3ParallelDownload(*args).start()
@@ -160,4 +160,6 @@ if __name__ == '__main__':
         sys.exit(1)
 
     (_ignore, ak, sk, bucket_name, key_name) = sys.argv
-    download(ak, sk, bucket_name, key_name)
+    file_path = download(ak, sk, bucket_name, key_name)
+
+    print("Downloaded: %s" % (file_path,))
