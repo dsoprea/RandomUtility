@@ -17,6 +17,7 @@ Disjunct utilities packaged for convenience.
 - *s3_parallel_upload.py*: A parallel S3 uploader using greenlets (gevent).
 - *s3_parallel_download.py*: A parallel S3 downloader using greenlets (gevent).
 - *ssl_sign.py*: A parallel S3 uploader using greenlets (gevent).
+- *get_tfs2015_build_definition_id.py*: A utility to resolve TFS 2015 build-definition names to their ID integers given an agent-path.
 
 ### C
 
