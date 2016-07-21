@@ -9,6 +9,7 @@ Disjunct utilities packaged for convenience.
 - *get_as_python.py*: Convert data to Python code.
 - *password_check.py*: A password strength-checker adapted from django-passwords.
 - *text_prompts.py*: Console-based form functionality.
+- *csv_print*: Command-line tool to format and print a CSV (either in column-oriented or row-oriented format).
 
 ### Python (Python 2.x compatible, or Python3 untested)
 
